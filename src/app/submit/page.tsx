@@ -117,6 +117,7 @@ export default function SubmitTool() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.1, ease: smoothEase }}
         onSubmit={handleSubmit} 
+        noValidate
         className="bg-[#0c0c0e] border border-zinc-800/80 p-8 md:p-10 rounded-3xl shadow-xl"
       >
         <div className="space-y-7">
