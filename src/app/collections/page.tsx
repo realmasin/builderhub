@@ -2,13 +2,14 @@
 import { motion } from "framer-motion";
 import { Sparkles, Terminal, Palette, Shield } from "lucide-react";
 import Link from "next/link";
+import { TOOLS_DATA } from "../../lib/data";
 
 const COLLECTIONS = [
   { 
     slug: "ai-power-stack",
     title: "AI Power Stack", 
     desc: "Powerful AI tools to accelerate code writing and idea generation.", 
-    count: "5 Tools", 
+    categories: ["AI Tools"],
     icon: Sparkles, 
     color: "text-purple-400 bg-purple-500/10" 
   },
@@ -16,7 +17,7 @@ const COLLECTIONS = [
     slug: "developer-essentials",
     title: "Developer Essentials", 
     desc: "Essential tools for the daily workflow of every professional developer.", 
-    count: "8 Tools", 
+    categories: ["Developer Tools"],
     icon: Terminal, 
     color: "text-blue-400 bg-blue-500/10" 
   },
@@ -24,7 +25,7 @@ const COLLECTIONS = [
     slug: "design-ui-gems",
     title: "Design & UI Gems", 
     desc: "Resources and tools to help you build stunning user interfaces with minimal effort.", 
-    count: "4 Tools", 
+    categories: ["Design"],
     icon: Palette, 
     color: "text-pink-400 bg-pink-500/10" 
   },
@@ -32,7 +33,7 @@ const COLLECTIONS = [
     slug: "devops-hosting",
     title: "DevOps & Hosting", 
     desc: "Platforms and solutions to deploy and manage your projects quickly and seamlessly.", 
-    count: "6 Tools", 
+    categories: ["Hosting", "Backend"],
     icon: Shield, 
     color: "text-emerald-400 bg-emerald-500/10" 
   },
@@ -52,6 +53,11 @@ export default function CollectionsPage() {
         <div className="grid md:grid-cols-2 gap-6">
           {COLLECTIONS.map((col, index) => {
             const Icon = col.icon;
+            
+            const toolCount = TOOLS_DATA.filter(tool => 
+              col.categories.includes(tool.category)
+            ).length;
+
             return (
               <motion.div 
                 key={col.slug}
@@ -72,7 +78,7 @@ export default function CollectionsPage() {
                     <p className="text-zinc-400 text-sm leading-relaxed line-clamp-2">{col.desc}</p>
                   </div>
                   <div className="text-xs font-semibold text-zinc-500 tracking-wider uppercase mt-6">
-                    {col.count}
+                    {toolCount} {toolCount === 1 ? "Tool" : "Tools"}
                   </div>
                 </Link>
               </motion.div>
