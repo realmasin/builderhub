@@ -1,2 +1,2 @@
 # builderhub
-Everything developers need is here
+Everything builders need is here
