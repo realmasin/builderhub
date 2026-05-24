@@ -42,7 +42,7 @@ export default function SubmitTool() {
             <div className="bg-[#111113] border border-zinc-800 p-8 rounded-3xl max-w-sm w-full text-center shadow-2xl">
               <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
               <h3 className="text-2xl font-bold text-white mb-2">Submitted!</h3>
-              <p className="text-zinc-400 mb-6">Your tool has been sent to the admin for review.</p>
+              <p className="text-zinc-400 mb-6">Awesome! Your tool is now in our queue.</p>
               <button 
                 onClick={() => setShowModal(false)}
                 className="w-full bg-zinc-800 hover:bg-zinc-700 text-white py-3 rounded-xl font-medium transition-colors"
