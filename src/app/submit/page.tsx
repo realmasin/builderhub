@@ -7,8 +7,6 @@ export default function SubmitPage() {
         <h1 className="text-4xl font-bold mb-4 text-white">Submit a Tool</h1>
         <p className="text-gray-400">
           Know a great developer tool or resource? Submit it below. 
-          <br />
-          <span className="text-purple-400 font-medium">All submissions are reviewed by the admin before being published.</span>
         </p>
       </div>
 
