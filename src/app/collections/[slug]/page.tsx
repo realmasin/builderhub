@@ -2,7 +2,8 @@
 import { motion } from "framer-motion";
 import { Sparkles, Terminal, Palette, Shield } from "lucide-react";
 import Link from "next/link";
-import { TOOLS_DATA } from "../../lib/data";
+import { TOOLS_DATA } from "../../../lib/data";
+
 
 const COLLECTIONS = [
   { 
