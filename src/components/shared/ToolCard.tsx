@@ -1,15 +1,16 @@
+"use client";
+
 import { ExternalLink, Heart } from "lucide-react";
-import Image from "next/image";
 import { Tool } from "../../types";
 
 export default function ToolCard({ tool }: { tool: Tool }) {
   return (
     <div className="glass-card p-6 flex flex-col h-full group hover:bg-zinc-800/50 hover:-translate-y-1 transition-all duration-300 w-full">
       
-      {/* head card*/}
+      {/* pic head - pic and love icon*/}
       <div className="flex justify-between items-start mb-6">
         <div className="w-14 h-14 relative rounded-xl overflow-hidden bg-zinc-900 border border-zinc-800 flex-shrink-0">
-          {/* brings pic*/}
+          {/* didn't get the pic*/}
           <img 
             src={tool.logo} 
             alt={tool.name}
@@ -24,7 +25,7 @@ export default function ToolCard({ tool }: { tool: Tool }) {
         </button>
       </div>
       
-      {/* tool name description */}
+      {/* tool name and description */}
       <h3 className="text-xl font-semibold text-zinc-100 mb-3 group-hover:text-purple-400 transition-colors">
         {tool.name}
       </h3>
@@ -32,7 +33,7 @@ export default function ToolCard({ tool }: { tool: Tool }) {
         {tool.description}
       </p>
       
-      {/* keywords */}
+      {/* keywords*/}
       <div className="flex flex-wrap gap-2 mb-6 w-full">
         {tool.tags.map((tag) => (
           <span key={tag} className="text-xs font-medium px-3 py-1.5 rounded-full bg-zinc-800/80 text-zinc-300 border border-zinc-700/50">
@@ -41,7 +42,7 @@ export default function ToolCard({ tool }: { tool: Tool }) {
         ))}
       </div>
       
-      {/* vst button */}
+      {/* add btn */}
       <a 
         href={tool.url} 
         target="_blank" 
