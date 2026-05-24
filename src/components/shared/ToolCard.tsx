@@ -1,62 +1,62 @@
 "use client";
-import { ExternalLink, Heart, ArrowRight } from "lucide-react";
+import { Heart, ArrowRight } from "lucide-react";
 import { Tool } from "../../types";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
 export default function ToolCard({ tool }: { tool: Tool }) {
   const [isFavorite, setIsFavorite] = useState(false);
 
-  // is tool in favorites 
   useEffect(() => {
-    const savedFavs = JSON.parse(localStorage.getItem("builderhub_favs") || "[]");
-    setIsFavorite(savedFavs.some((t: Tool) => t.id === tool.id));
+    const saved = JSON.parse(localStorage.getItem("builderhub_favs") || "[]");
+    setIsFavorite(saved.some((t: Tool) => t.id === tool.id));
   }, [tool.id]);
 
-  // heart job
   const toggleFavorite = (e: React.MouseEvent) => {
-    e.preventDefault(); 
-    const savedFavs = JSON.parse(localStorage.getItem("builderhub_favs") || "[]");
+    e.preventDefault();
+    let saved = JSON.parse(localStorage.getItem("builderhub_favs") || "[]");
     
     if (isFavorite) {
-      const newFavs = savedFavs.filter((t: Tool) => t.id !== tool.id);
-      localStorage.setItem("builderhub_favs", JSON.stringify(newFavs));
-      setIsFavorite(false);
+      saved = saved.filter((t: Tool) => t.id !== tool.id);
     } else {
-      savedFavs.push(tool);
-      localStorage.setItem("builderhub_favs", JSON.stringify(savedFavs));
-      setIsFavorite(true);
+      saved.push(tool);
     }
+    
+    localStorage.setItem("builderhub_favs", JSON.stringify(saved));
+    setIsFavorite(!isFavorite);
+    // if open update
+    window.dispatchEvent(new Event("favorites_updated"));
   };
 
   return (
-    <div className="group relative flex flex-col h-full bg-[#0c0c0e] hover:bg-[#121214] border border-zinc-800/80 hover:border-zinc-700 p-6 rounded-2xl transition-all duration-500 ease-out">
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+      className="group flex flex-col h-full bg-[#111113] border border-zinc-800/80 hover:border-purple-500/30 p-6 rounded-2xl transition-colors duration-300"
+    >
       <div className="flex justify-between items-start mb-6">
-        <div className="w-12 h-12 relative rounded-xl overflow-hidden bg-white/5 border border-zinc-800 flex-shrink-0 transition-transform duration-500 group-hover:scale-105 group-hover:shadow-lg">
-          <img src={tool.logo} alt={tool.name} className="object-cover w-full h-full p-1" onError={(e) => { (e.target as HTMLImageElement).src = 'https://placehold.co/100x100/18181b/ffffff?text=Icon'; }} />
+        <div className="w-14 h-14 rounded-xl overflow-hidden bg-zinc-900 border border-zinc-800 flex-shrink-0 p-1">
+          <img src={tool.logo} alt={tool.name} className="object-contain w-full h-full rounded-lg" />
         </div>
         
-        {/* heart effects */}
-        <button 
+        <motion.button 
+          whileTap={{ scale: 0.8 }}
           onClick={toggleFavorite}
-          className="text-zinc-500 hover:text-red-500 transition-all duration-300 p-2 rounded-full hover:bg-red-500/10 active:scale-75"
+          className="p-2 rounded-full hover:bg-zinc-800 transition-colors"
         >
-          <Heart className={`w-5 h-5 transition-all duration-300 ${isFavorite ? "fill-red-500 text-red-500" : ""}`} />
-        </button>
+          <Heart className={`w-5 h-5 transition-colors ${isFavorite ? "fill-purple-500 text-purple-500" : "text-zinc-500"}`} />
+        </motion.button>
       </div>
       
-      <h3 className="text-xl font-medium text-zinc-100 mb-2 transition-colors duration-300 group-hover:text-white">{tool.name}</h3>
-      <p className="text-zinc-400 text-sm mb-6 leading-relaxed flex-grow opacity-80 group-hover:opacity-100 transition-opacity duration-300">{tool.description}</p>
+      <h3 className="text-xl font-semibold text-zinc-100 mb-2">{tool.name}</h3>
+      <p className="text-zinc-400 text-sm mb-6 leading-relaxed flex-grow line-clamp-3">{tool.description}</p>
       
-      <div className="flex flex-wrap gap-2 mb-6 w-full">
-        {tool.tags.map((tag) => (
-          <span key={tag} className="text-[11px] font-medium px-2.5 py-1 rounded-md bg-zinc-800/50 text-zinc-300 border border-zinc-700/50 uppercase tracking-wider">{tag}</span>
-        ))}
-      </div>
-      
-      <Link href={`/tools/${tool.id}`} className="w-full flex items-center justify-center gap-2 bg-zinc-100 text-zinc-900 hover:bg-white py-2.5 rounded-lg text-sm font-semibold transition-all duration-300 mt-auto active:scale-[0.98]">
+      <Link href={`/tools/${tool.id}`} className="w-full flex items-center justify-between bg-zinc-900 group-hover:bg-purple-600/10 text-zinc-300 group-hover:text-purple-400 px-4 py-3 rounded-xl text-sm font-medium transition-colors duration-300">
         View Details <ArrowRight className="w-4 h-4" />
       </Link>
-    </div>
+    </motion.div>
   );
 }
