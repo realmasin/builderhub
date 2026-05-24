@@ -12,10 +12,11 @@ export default function Navbar() {
   const pathname = usePathname();
 
   const links = [
-    { name: "Explore", path: "/tools" },
-    { name: "Favorites", path: "/favorites" },
-    { name: "About Us", path: "/about" },
-  ];
+  { name: "Explore", path: "/tools" },
+  { name: "Collections", path: "/collections" }, 
+  { name: "About Us", path: "/about" },
+];
+
 
   return (
     <nav className="w-full sticky top-0 z-50 bg-[#09090b]/80 backdrop-blur-xl border-b border-zinc-800/50">
