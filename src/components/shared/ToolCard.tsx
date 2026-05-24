@@ -1,32 +1,41 @@
 import { ExternalLink, Heart } from "lucide-react";
+import Image from "next/image";
 import { Tool } from "../../types";
 
 export default function ToolCard({ tool }: { tool: Tool }) {
   return (
-    <div className="glass-card p-6 flex flex-col h-full group hover:border-purple-500/50 transition-colors duration-300">
+    <div className="glass-card p-6 flex flex-col h-full group hover:bg-zinc-800/50 hover:-translate-y-1 transition-all duration-300 w-full">
       
-      {/* caard heading*/}
-      <div className="flex justify-between items-start mb-4">
-        <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center text-xl font-bold text-white">
-          {tool.logo}
+      {/* head card*/}
+      <div className="flex justify-between items-start mb-6">
+        <div className="w-14 h-14 relative rounded-xl overflow-hidden bg-zinc-900 border border-zinc-800 flex-shrink-0">
+          {/* brings pic*/}
+          <img 
+            src={tool.logo} 
+            alt={tool.name}
+            className="object-cover w-full h-full"
+            onError={(e) => {
+              (e.target as HTMLImageElement).src = 'https://placehold.co/100x100/18181b/ffffff?text=Icon';
+            }}
+          />
         </div>
-        <button className="text-gray-400 hover:text-red-400 transition-colors">
+        <button className="text-zinc-500 hover:text-purple-500 transition-colors bg-zinc-900/50 p-2 rounded-full">
           <Heart className="w-5 h-5" />
         </button>
       </div>
       
-      {/* tool name */}
-      <h3 className="text-xl font-bold text-white mb-2 group-hover:text-purple-400 transition-colors">
+      {/* tool name description */}
+      <h3 className="text-xl font-semibold text-zinc-100 mb-3 group-hover:text-purple-400 transition-colors">
         {tool.name}
       </h3>
-      <p className="text-gray-400 text-sm mb-4 flex-grow">
+      <p className="text-zinc-400 text-sm mb-6 leading-relaxed flex-grow">
         {tool.description}
       </p>
       
-      {/* tags */}
-      <div className="flex flex-wrap gap-2 mb-6">
+      {/* keywords */}
+      <div className="flex flex-wrap gap-2 mb-6 w-full">
         {tool.tags.map((tag) => (
-          <span key={tag} className="text-xs font-medium px-2.5 py-1 rounded-md bg-white/5 text-gray-300">
+          <span key={tag} className="text-xs font-medium px-3 py-1.5 rounded-full bg-zinc-800/80 text-zinc-300 border border-zinc-700/50">
             {tag}
           </span>
         ))}
@@ -37,11 +46,10 @@ export default function ToolCard({ tool }: { tool: Tool }) {
         href={tool.url} 
         target="_blank" 
         rel="noreferrer"
-        className="w-full flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 text-white py-2.5 rounded-lg text-sm font-medium transition-colors mt-auto"
+        className="w-full flex items-center justify-center gap-2 bg-zinc-800 hover:bg-purple-600 text-zinc-100 py-3 rounded-lg text-sm font-medium transition-all duration-300 mt-auto"
       >
-        Visit Site <ExternalLink className="w-4 h-4" />
+        Visit Website <ExternalLink className="w-4 h-4" />
       </a>
     </div>
   );
 }
-
