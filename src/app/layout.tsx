@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import Navbar from "../components/shared/Navbar";
 
 export const metadata: Metadata = {
   title: "BuilderHub | Discover the Best Developer Tools",
@@ -13,28 +14,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className="antialiased">
-
+      <body className="antialiased flex flex-col min-h-screen">
         
-        {/* Navbar Placeholder */}
-        <nav className="w-full border-b border-white/10 p-4 backdrop-blur-md sticky top-0 z-50">
-          <div className="max-w-6xl mx-auto flex justify-between items-center">
-            <h1 className="text-xl font-bold tracking-tight">Builder<span className="text-purple-500">Hub</span></h1>
-            <button className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
-              Submit Tool
-            </button>
-          </div>
-        </nav>
-
-        {/* Main Content */}
-        <main className="min-h-screen">
+        <Navbar />
+        
+        <main className="flex-grow">
           {children}
         </main>
-
-        {/* Footer Placeolder */}
-        <footer className="border-t border-white/10 p-8 text-center text-sm text-gray-400">
-          © 2026 BuilderHub. All rights reserved.
+        
+        <footer className="border-t border-white/10 p-8 text-center text-sm text-gray-500 mt-auto bg-black/20">
+          <p>© 2026 BuilderHub. All rights reserved.</p>
+          <p className="mt-1 text-xs">Directory managed and curated by the admin.</p>
         </footer>
+        
       </body>
     </html>
   );
