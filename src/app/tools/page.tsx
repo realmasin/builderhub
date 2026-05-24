@@ -8,7 +8,7 @@ export default function ToolsPage() {
   const [search, setSearch] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
 
-  // الفلترة الديناميكية
+  // dynamic filtering 
   const filteredTools = TOOLS_DATA.filter((tool) => {
     const matchesSearch = tool.name.toLowerCase().includes(search.toLowerCase()) || 
                           tool.tags.some(tag => tag.toLowerCase().includes(search.toLowerCase()));
@@ -17,10 +17,10 @@ export default function ToolsPage() {
   });
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-12">
+    <div className="max-w-6xl mx-auto px-4 py-12 animate-in fade-in slide-in-from-bottom-4 duration-700 ease-out">
+      
       <div className="mb-10">
         <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">Explore Tools</h1>
-        <p className="text-zinc-400 text-lg">Browse {TOOLS_DATA.length} curated resources for builders.</p>
       </div>
 
       <div className="flex flex-col md:flex-row gap-4 mb-10">
