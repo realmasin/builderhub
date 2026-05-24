@@ -1,43 +1,88 @@
 "use client";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
+
+
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+
+  const links = [
+    { name: "Explore", path: "/tools" },
+    { name: "Favorites", path: "/favorites" },
+    { name: "About Us", path: "/about" },
+  ];
 
   return (
-    <nav className="w-full border-b border-zinc-800 p-4 backdrop-blur-md sticky top-0 z-50 bg-[#09090b]/90">
-      <div className="max-w-6xl mx-auto flex justify-between items-center">
-        <Link href="/" className="text-xl font-bold tracking-tight text-white hover:opacity-80 transition-opacity">
+    <nav className="w-full sticky top-0 z-50 bg-[#09090b]/80 backdrop-blur-xl border-b border-zinc-800/50">
+      <div className="max-w-6xl mx-auto px-6 h-20 flex justify-between items-center">
+        <Link href="/" className="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
           Builder<span className="text-purple-500">Hub</span>
         </Link>
         
-        {/* Desktop Menu */}
-        <div className="hidden md:flex items-center gap-6 text-sm font-medium text-zinc-300">
-          <Link href="/tools" className="hover:text-purple-400 transition-colors">Explore</Link>
-          <Link href="/about" className="hover:text-purple-400 transition-colors">About Us</Link>
-          <Link href="/favorites" className="hover:text-purple-400 transition-colors">Favorites</Link>
-          <Link href="/submit" className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg transition-colors shadow-lg shadow-purple-500/10">
+        {/* Desktop Menu - UI Premium */}
+        <div className="hidden md:flex items-center bg-zinc-900/50 border border-zinc-800 rounded-full px-2 py-1.5">
+          {links.map((link) => (
+            <Link 
+              key={link.path} 
+              href={link.path} 
+              className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${pathname === link.path ? "bg-zinc-800 text-white" : "text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/50"}`}
+            >
+              {link.name}
+            </Link>
+          ))}
+        </div>
+
+        <div className="hidden md:block">
+          <Link href="/submit" className="bg-purple-600/10 border border-purple-500/20 hover:bg-purple-600 hover:text-white text-purple-400 px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300">
             Submit Tool
           </Link>
         </div>
 
-        {/* Mobile Burger Button */}
-        <button className="md:hidden text-zinc-300" onClick={() => setIsOpen(!isOpen)}>
-          {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+        {/* Mobile Toggle */}
+
+        
+        <button className="md:hidden text-zinc-300 p-2" onClick={() => setIsOpen(!isOpen)}>
+          {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
-      {/* Mobile Dropdown Menu */}
-      {isOpen && (
-        <div className="md:hidden absolute top-full left-0 w-full bg-[#09090b] border-b border-zinc-800 flex flex-col items-center py-6 gap-6 shadow-2xl">
-          <Link href="/tools" onClick={() => setIsOpen(false)} className="text-zinc-300 font-medium">Explore Tools</Link>
-          <Link href="/about" onClick={() => setIsOpen(false)} className="text-zinc-300 font-medium">About Us</Link>
-          <Link href="/favorites" onClick={() => setIsOpen(false)} className="text-zinc-300 font-medium">Favorites</Link>
-          <Link href="/submit" onClick={() => setIsOpen(false)} className="bg-purple-600 text-white px-6 py-2 rounded-lg font-medium">Submit Tool</Link>
-        </div>
-      )}
+      {/* Mobile Menu with Framer Motion Transition */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div 
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden border-b border-zinc-800 bg-[#09090b] overflow-hidden"
+          >
+            <div className="flex flex-col px-6 py-6 gap-4">
+              {links.map((link) => (
+                <Link 
+                  key={link.path} 
+                  href={link.path} 
+                  onClick={() => setIsOpen(false)}
+                  className="text-lg font-medium text-zinc-300 hover:text-purple-400 transition-colors"
+                >
+                  {link.name}
+                </Link>
+              ))}
+              <hr className="border-zinc-800 my-2" />
+              <Link 
+                href="/submit" 
+                onClick={() => setIsOpen(false)}
+                className="bg-purple-600 text-white text-center py-3 rounded-xl font-medium"
+              >
+                Submit Tool
+              </Link>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }
