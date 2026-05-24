@@ -1,24 +1,31 @@
 import type { Metadata } from "next";
-import { Outfit } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "../components/shared/Navbar";
+import Footer from "../components/shared/Footer"; // call footer
 
-// professional outfit 
-const outfit = Outfit({ subsets: ["latin"], weight: ["300", "400", "500", "600", "700"] });
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "BuilderHub | Tools Directory",
-  description: "Curated tools for modern developers",
+  title: "BuilderHub - Developer Directory",
+  description: "Curated stacks for modern workflows",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="en" className="dark">
-      <body className={`${outfit.className} bg-[#09090b] text-zinc-300 antialiased selection:bg-purple-500/30`}>
-        <Navbar />
-        <main className="min-h-screen">
+    <html lang="en">
+      <body className={`${inter.className} bg-black text-white antialiased min-h-screen flex flex-col justify-between`}>
+        {/* website content*/}
+        
+        <main className="flex-grow">
           {children}
         </main>
+        
+        
+        <Footer />
       </body>
     </html>
   );
