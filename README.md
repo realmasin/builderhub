@@ -33,13 +33,20 @@ Make sure you have Node.js (version 18.17 or higher) installed.
    git clone [https://github.com/your-username/builderhub.git](https://github.com/your-username/builderhub.git)
    
 2 Navigate to the project directory:
+```bash
 cd builderhub
-
+```
 3 Install the dependencies:
+``` bash
 npm install
 
+```
+
 4 Start the development server:
+```bash
 npm run dev
+```
+
 
 📁 Project Structure
 ​A quick look at the core structure of the application:
