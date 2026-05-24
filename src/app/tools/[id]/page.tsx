@@ -1,79 +1,70 @@
+"use client";
 import { TOOLS_DATA } from "../../../lib/data";
-import { ExternalLink, ArrowLeft, CheckCircle2, ChevronRight, Layers } from "lucide-react";
+import { ExternalLink, ArrowLeft, Layers, Zap } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { motion } from "framer-motion";
 
 export default function ToolDetails({ params }: { params: { id: string } }) {
   const tool = TOOLS_DATA.find((t) => t.id === params.id);
   if (!tool) notFound();
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-12 animate-in fade-in slide-in-from-bottom-4 duration-700 ease-out">
-      {/* path trns */}
-      <nav className="flex items-center gap-2 text-sm text-zinc-500 mb-10">
-        <Link href="/tools" className="hover:text-zinc-300 transition-colors">Tools</Link>
-        <ChevronRight className="w-4 h-4" />
-        <span className="text-zinc-300">{tool.category}</span>
-        <ChevronRight className="w-4 h-4" />
-        <span className="text-white font-medium">{tool.name}</span>
-      </nav>
+    <div className="max-w-5xl mx-auto px-6 py-12">
+      <Link href="/tools" className="inline-flex items-center gap-2 text-zinc-500 hover:text-purple-400 transition-colors mb-12">
+        <ArrowLeft className="w-4 h-4" /> Back to Tools
+      </Link>
 
-      {/* header */}
-      <div className="flex flex-col md:flex-row gap-8 items-start mb-16 border-b border-zinc-800 pb-12">
-        <div className="w-24 h-24 rounded-2xl border border-zinc-700 bg-white/5 flex-shrink-0 p-2 shadow-2xl">
-          <img src={tool.logo} alt={tool.name} className="w-full h-full object-cover rounded-xl" />
-        </div>
-        
-        <div className="flex-1">
-          <div className="flex items-center gap-3 mb-3">
-            <h1 className="text-4xl md:text-5xl font-bold text-white tracking-tight">{tool.name}</h1>
-            <span className="bg-emerald-500/10 text-emerald-400 px-3 py-1 rounded-full text-xs font-semibold border border-emerald-500/20 flex items-center gap-1">
-              <CheckCircle2 className="w-3 h-3" /> Verified
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="grid grid-cols-1 lg:grid-cols-3 gap-12"
+      >
+        {/* right row */}
+        <div className="lg:col-span-1 space-y-6">
+          <div className="bg-[#111113] border border-zinc-800 p-8 rounded-3xl flex flex-col items-center text-center">
+            <div className="w-24 h-24 rounded-2xl bg-zinc-900 border border-zinc-800 p-2 mb-6">
+              <img src={tool.logo} alt={tool.name} className="w-full h-full object-contain rounded-xl" />
+            </div>
+            <h1 className="text-3xl font-bold text-white mb-2">{tool.name}</h1>
+            <span className="text-purple-400 bg-purple-500/10 px-4 py-1.5 rounded-full text-sm font-medium mb-6">
+              {tool.category}
             </span>
+            <a href={tool.url} target="_blank" rel="noreferrer" className="w-full flex items-center justify-center gap-2 bg-zinc-200 hover:bg-white text-zinc-900 py-3.5 rounded-xl font-bold transition-all">
+              Visit Website <ExternalLink className="w-4 h-4" />
+            </a>
           </div>
-          
-          <p className="text-xl text-zinc-400 leading-relaxed mb-8 max-w-2xl">
-            {tool.description}
-          </p>
-
-          <a href={tool.url} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 bg-white text-black hover:bg-zinc-200 px-6 py-3 rounded-xl font-bold transition-all active:scale-95 shadow-lg">
-            Visit Official Website <ExternalLink className="w-4 h-4" />
-          </a>
         </div>
-      </div>
 
-      {/* descr */}
-      <div className="space-y-12 text-zinc-300 leading-relaxed text-lg">
-        <section>
-          <h2 className="text-2xl font-semibold text-white mb-4 flex items-center gap-2">
-            <Layers className="w-6 h-6 text-zinc-500" /> What is {tool.name}?
-          </h2>
-          <p className="mb-4">
-            {tool.name} is a powerful solution designed specifically for the <strong>{tool.category.toLowerCase()}</strong> ecosystem. It streamlines the workflow for developers and creators by offering a robust set of features that eliminate traditional bottlenecks.
-          </p>
-          <p>
-            Whether you are building a small side project or a massive enterprise application, this tool provides the scalability and performance required to succeed in today's fast-paced digital environment.
-          </p>
-        </section>
+        {/* main description */}
+        <div className="lg:col-span-2 space-y-10">
+          <section className="bg-[#111113] border border-zinc-800 p-8 md:p-10 rounded-3xl">
+            <h2 className="text-2xl font-semibold text-white mb-6 flex items-center gap-3">
+              <Layers className="w-6 h-6 text-purple-500" /> Overview
+            </h2>
+            <p className="text-zinc-400 text-lg leading-relaxed mb-6">
+              {tool.description}
+            </p>
+            <p className="text-zinc-400 text-lg leading-relaxed">
+              This platform empowers modern creators by providing robust features that are essential for building high-quality projects. Its integration capabilities and user-friendly interface make it a top choice in the {tool.category.toLowerCase()} space.
+            </p>
+          </section>
 
-        <section className="bg-[#121214] border border-zinc-800 p-8 rounded-2xl">
-          <h3 className="text-xl font-semibold text-white mb-6">Why we recommend it</h3>
-          <ul className="space-y-4">
-            <li className="flex items-start gap-3">
-              <div className="w-6 h-6 rounded-full bg-zinc-800 flex items-center justify-center flex-shrink-0 mt-0.5"><CheckCircle2 className="w-4 h-4 text-zinc-400" /></div>
-              <p><strong>Industry Standard:</strong> Widely adopted by top tech companies and independent builders alike.</p>
-            </li>
-            <li className="flex items-start gap-3">
-              <div className="w-6 h-6 rounded-full bg-zinc-800 flex items-center justify-center flex-shrink-0 mt-0.5"><CheckCircle2 className="w-4 h-4 text-zinc-400" /></div>
-              <p><strong>Excellent Developer Experience:</strong> Clean documentation and a highly intuitive interface.</p>
-            </li>
-            <li className="flex items-start gap-3">
-              <div className="w-6 h-6 rounded-full bg-zinc-800 flex items-center justify-center flex-shrink-0 mt-0.5"><CheckCircle2 className="w-4 h-4 text-zinc-400" /></div>
-              <p><strong>Active Community:</strong> Strong support network and regular updates to the core platform.</p>
-            </li>
-          </ul>
-        </section>
-      </div>
+          <section className="bg-gradient-to-br from-purple-900/20 to-[#111113] border border-zinc-800 p-8 md:p-10 rounded-3xl">
+            <h2 className="text-2xl font-semibold text-white mb-6 flex items-center gap-3">
+              <Zap className="w-6 h-6 text-yellow-500" /> Key Tags
+            </h2>
+            <div className="flex flex-wrap gap-3">
+              {tool.tags.map((tag) => (
+                <span key={tag} className="bg-zinc-900 border border-zinc-700 text-zinc-300 px-5 py-2 rounded-lg font-medium">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </section>
+        </div>
+      </motion.div>
     </div>
   );
 }
