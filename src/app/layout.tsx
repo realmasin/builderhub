@@ -1,32 +1,24 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Outfit } from "next/font/google";
 import "./globals.css";
 import Navbar from "../components/shared/Navbar";
 
-const inter = Inter({ subsets: ["latin"] });
+// professional outfit 
+const outfit = Outfit({ subsets: ["latin"], weight: ["300", "400", "500", "600", "700"] });
 
 export const metadata: Metadata = {
-  title: "BuilderHub | Discover Tools",
-  description: "A modern platform for developers and builders.",
+  title: "BuilderHub | Tools Directory",
+  description: "Curated tools for modern developers",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="dark">
-      <body className={`${inter.className} flex flex-col min-h-screen bg-[#09090b] text-zinc-100`}>
+      <body className={`${outfit.className} bg-[#09090b] text-zinc-300 antialiased selection:bg-purple-500/30`}>
         <Navbar />
-        <main className="flex-grow w-full">
+        <main className="min-h-screen">
           {children}
         </main>
-        <footer className="border-t border-zinc-800 p-8 text-center text-sm text-zinc-500 mt-auto bg-black/40">
-  <p>© 2026 BuilderHub. All rights reserved.</p>
-  <p className="mt-1 text-xs">Curated by realmasin | Open for contributions.</p>
-</footer>
-
       </body>
     </html>
   );
