@@ -14,20 +14,28 @@ export default function ToolCard({ tool }: { tool: Tool }) {
   }, [tool.id]);
 
   const toggleFavorite = (e: React.MouseEvent) => {
-    e.preventDefault();
-    let saved = JSON.parse(localStorage.getItem("builderhub_favs") || "[]");
-    
+  e.preventDefault();
+  e.stopPropagation(); 
+  
+  try {
+    const saved = JSON.parse(localStorage.getItem("builderhub_favs") || "[]");
+    let newFavorites;
+
     if (isFavorite) {
-      saved = saved.filter((t: Tool) => t.id !== tool.id);
+      
+      newFavorites = saved.filter((t: Tool) => String(t.id) !== String(tool.id));
     } else {
-      saved.push(tool);
+      newFavorites = [...saved, tool];
     }
     
-    localStorage.setItem("builderhub_favs", JSON.stringify(saved));
+    localStorage.setItem("builderhub_favs", JSON.stringify(newFavorites));
     setIsFavorite(!isFavorite);
-    // if open update
     window.dispatchEvent(new Event("favorites_updated"));
-  };
+  } catch (error) {
+    console.error("Error updating favorites", error);
+  }
+};
+
 
   return (
     <motion.div 
