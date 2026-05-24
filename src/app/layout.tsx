@@ -24,7 +24,8 @@ export default function RootLayout({
         </main>
         <footer className="border-t border-zinc-800 p-8 text-center text-sm text-zinc-500 mt-auto bg-black/40">
           <p>© 2026 BuilderHub. All rights reserved.</p>
-          <p className="mt-1 text-xs">Directory managed by the admin.</p>
+          <p className="mt-1 text-xs">Curated by realmasin | Open for contributions.</p>
+
         </footer>
       </body>
     </html>
