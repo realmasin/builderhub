@@ -23,10 +23,10 @@ export default function RootLayout({
           {children}
         </main>
         <footer className="border-t border-zinc-800 p-8 text-center text-sm text-zinc-500 mt-auto bg-black/40">
-          <p>© 2026 BuilderHub. All rights reserved.</p>
-          <p className="mt-1 text-xs">Curated by realmasin | Open for contributions.</p>
+  <p>© 2026 BuilderHub. All rights reserved.</p>
+  <p className="mt-1 text-xs">Curated by realmasin | Open for contributions.</p>
+</footer>
 
-        </footer>
       </body>
     </html>
   );
