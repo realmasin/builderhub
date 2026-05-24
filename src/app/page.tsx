@@ -11,7 +11,7 @@ const DUMMY_TOOLS: Tool[] = [
     category: "AI Tools",
     tags: ["Editor", "AI", "Coding"],
     url: "https://cursor.com",
-    logo: "/logos/cursor.png" 
+    logo: "https://api.microlink.io?url=https://cursor.com&embed=logo.url" // Cursor
   },
   {
     id: "2",
@@ -20,7 +20,7 @@ const DUMMY_TOOLS: Tool[] = [
     category: "Hosting",
     tags: ["Deployment", "Next.js", "Cloud"],
     url: "https://vercel.com",
-    logo: "/logos/vercel.png"
+    logo: "https://api.microlink.io?url=https://vercel.com&embed=logo.url" // Vercel
   },
   {
     id: "3",
@@ -29,7 +29,7 @@ const DUMMY_TOOLS: Tool[] = [
     category: "Backend",
     tags: ["Database", "Auth", "SQL"],
     url: "https://supabase.com",
-    logo: "/logos/supabase.png"
+    logo: "https://api.microlink.io?url=https://supabase.com&embed=logo.url" // Supabase
   },
   {
     id: "4",
@@ -38,7 +38,7 @@ const DUMMY_TOOLS: Tool[] = [
     category: "Design",
     tags: ["CSS", "Frontend", "Styling"],
     url: "https://tailwindcss.com",
-    logo: "/logos/tailwindcss.png"
+    logo: "https://api.microlink.io?url=https://tailwindcss.com&embed=logo.url" // Tailwind
   },
   {
     id: "5",
@@ -47,7 +47,7 @@ const DUMMY_TOOLS: Tool[] = [
     category: "Design",
     tags: ["Web Design", "No-Code", "CMS"],
     url: "https://framer.com",
-    logo: "/logos/framer.png"
+    logo: "https://api.microlink.io?url=https://framer.com&embed=logo.url" // Framer
   },
   {
     id: "6",
@@ -56,7 +56,7 @@ const DUMMY_TOOLS: Tool[] = [
     category: "Developer Tools",
     tags: ["TypeScript", "Validation", "DevOps"],
     url: "https://zod.dev",
-    logo: "/logos/zod.png"
+    logo: "https://api.microlink.io?url=https://zod.dev&embed=logo.url" // Zod
   }
 ];
 
