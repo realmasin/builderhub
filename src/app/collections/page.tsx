@@ -1,9 +1,11 @@
 "use client";
 import { motion } from "framer-motion";
 import { Sparkles, Terminal, Palette, Shield } from "lucide-react";
+import Link from "next/link";
 
 const COLLECTIONS = [
   { 
+    slug: "ai-power-stack",
     title: "AI Power Stack", 
     desc: "Powerful AI tools to accelerate code writing and idea generation.", 
     count: "5 Tools", 
@@ -11,6 +13,7 @@ const COLLECTIONS = [
     color: "text-purple-400 bg-purple-500/10" 
   },
   { 
+    slug: "developer-essentials",
     title: "Developer Essentials", 
     desc: "Essential tools for the daily workflow of every professional developer.", 
     count: "8 Tools", 
@@ -18,6 +21,7 @@ const COLLECTIONS = [
     color: "text-blue-400 bg-blue-500/10" 
   },
   { 
+    slug: "design-ui-gems",
     title: "Design & UI Gems", 
     desc: "Resources and tools to help you build stunning user interfaces with minimal effort.", 
     count: "4 Tools", 
@@ -25,6 +29,7 @@ const COLLECTIONS = [
     color: "text-pink-400 bg-pink-500/10" 
   },
   { 
+    slug: "devops-hosting",
     title: "DevOps & Hosting", 
     desc: "Platforms and solutions to deploy and manage your projects quickly and seamlessly.", 
     count: "6 Tools", 
@@ -32,7 +37,6 @@ const COLLECTIONS = [
     color: "text-emerald-400 bg-emerald-500/10" 
   },
 ];
-
 
 export default function CollectionsPage() {
   return (
@@ -50,22 +54,27 @@ export default function CollectionsPage() {
             const Icon = col.icon;
             return (
               <motion.div 
-                key={col.title}
+                key={col.slug}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1, duration: 0.7 }}
-                className="group p-8 bg-[#0c0c0e] border border-zinc-800 hover:border-zinc-700/80 rounded-3xl cursor-pointer transition-all flex flex-col justify-between h-64"
+                className="group h-full"
               >
-                <div>
-                  <div className={`w-12 h-12 rounded-2xl ${col.color} flex items-center justify-center mb-6`}>
-                    <Icon className="w-5 h-5" />
+                <Link 
+                  href={`/collections/${col.slug}`}
+                  className="block h-full p-8 bg-[#0c0c0e] border border-zinc-800 hover:border-zinc-700/80 rounded-3xl cursor-pointer transition-all flex flex-col justify-between"
+                >
+                  <div>
+                    <div className={`w-12 h-12 rounded-2xl ${col.color} flex items-center justify-center mb-6`}>
+                      <Icon className="w-5 h-5" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-purple-400 transition-colors">{col.title}</h3>
+                    <p className="text-zinc-400 text-sm leading-relaxed line-clamp-2">{col.desc}</p>
                   </div>
-                  <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-purple-400 transition-colors">{col.title}</h3>
-                  <p className="text-zinc-400 text-sm leading-relaxed line-clamp-2">{col.desc}</p>
-                </div>
-                <div className="text-xs font-semibold text-zinc-500 tracking-wider uppercase mt-4">
-                  {col.count}
-                </div>
+                  <div className="text-xs font-semibold text-zinc-500 tracking-wider uppercase mt-6">
+                    {col.count}
+                  </div>
+                </Link>
               </motion.div>
             );
           })}
