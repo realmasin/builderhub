@@ -103,8 +103,8 @@ export default function SubmitTool() {
       </AnimatePresence>
 
       <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold text-white mb-3 tracking-tighter">Submit a Tool</h1>
-        <p className="text-zinc-400">Suggest a new resource for our directory.</p>
+        <h1 className="text-4xl font-bold text-white mb-3 tracking-tighter">Suggest New Nool </h1>
+        <p className="text-zinc-400">You have a new tool...that's great! Tell us about it. </p>
       </div>
 
       <form onSubmit={handleSubmit} className="bg-[#0c0c0e] border border-zinc-800/60 p-8 rounded-3xl space-y-6">
